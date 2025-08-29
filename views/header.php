@@ -26,7 +26,7 @@ $homeHref = $base . 'index.php';
       <ul class="u-nav">
         <li><a href=" <?php echo $base; ?>portfolio.php">Galería</a></li>
         <li><a href=" <?php echo $base; ?>Novedades.html">Novedades</a></li>
-        <li><a href=" <?php echo $base; ?>Recursos-Humanos.html">Recursos Humanos</a></li>
+        <li><a href=" <?php echo $base; ?>Recursos-Humanos.php">Recursos Humanos</a></li>
         <li><a href=" <?php echo $base; ?>contacto.php">Contacto</a></li>
         <li><a href=" <?php echo $base; ?>Suscribirse.html">Suscribirse</a></li>
       </ul>
