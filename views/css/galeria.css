@@ -1,0 +1,332 @@
+        /* ===== SOLUCIONES PARA CONFLICTOS DE SCROLL ===== */
+        
+        /* Asegurar que el body permita scroll */
+        body {
+            overflow-x: auto !important; /* permite scroll horizontal cuando sea necesario */
+            overflow-y: auto !important; /* permite scroll vertical cuando sea necesario */
+            height: auto !important; /* altura dinámica */
+            min-height: 100vh; /* asegura cubrir toda la altura de la ventana */
+        }
+        
+        /* Asegurar que html permita scroll */
+        html {
+            overflow-x: auto !important; /* scroll horizontal habilitado */
+            overflow-y: auto !important; /* scroll vertical habilitado */
+            height: auto !important; /* altura automática */
+        }
+        
+        /* Reset específico para la galería */
+        #galeria-section {
+            overflow: visible !important; /* evita ocultar contenido dentro de la sección */
+        }
+        
+        /* Asegurar que el contenedor principal permita scroll */
+        .galeria-wrapper {
+            overflow: visible !important; /* asegura que no se recorte el contenido */
+        }
+        
+        /* Asegurar que el header fijo no interfiera con el scroll */
+        .u-header.scrolled {
+            z-index: 999 !important; /* header por encima de la galería */
+        }
+        
+        /* Asegurar que el footer no bloquee el scroll */
+        .footer {
+            position: relative !important; /* posicionamiento estándar del footer */
+            overflow: visible !important; /* no recortar efectos/elementos flotantes */
+        }
+        
+        /* ===== VARIABLES CSS ===== */
+        :root {
+            --civil-color: #3498db; /* azul para obras civiles */
+            --network-color: #2ecc71; /* verde para redes */
+            --infrastructure-color: #e74c3c; /* rojo para infraestructura */
+        }
+        
+        #galeria-section {
+            background-color: #9b59b6; /* color de fondo general */
+            margin: 0; /* elimina márgenes */
+            padding: 0; /* elimina relleno */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* tipografía base */
+            display: flex; /* layout en fila/columna */
+            min-height: 100vh; /* permite que la página haga scroll */
+            align-items: stretch; /* hijos con misma altura */
+        }
+
+        .sidebar {
+            width: 400px; /* ancho fijo de la barra lateral */
+            background-color: #f8f9fa; /* fondo claro */
+            border-right: 1px solid #dee2e6; /* separador derecho */
+            display: flex; /* contenedor flexible vertical */
+            flex-direction: column; /* apila elementos */
+            height: 100vh; /* iguala la altura al mapa */
+            position: relative; /* control de posicionamiento */
+            overflow: hidden; /* evita scroll interno */
+        }
+
+        .sidebar-header {
+            padding: 20px; /* espaciado interno */
+            background-color: #2c3e50; /* fondo oscuro */
+            color: white; /* texto claro */
+            text-align: center; /* centrado */
+            flex-shrink: 0; /* evita que se encoja */
+        }
+
+        .sidebar-title {
+            margin: 0; /* sin margen */
+            font-size: 1.5rem; /* tamaño de título */
+        }
+
+        .category-tabs {
+            display: flex; /* pestañas en fila */
+            background-color: #34495e; /* fondo intermedio */
+            flex-shrink: 0; /* evita encogimiento */
+        }
+
+        .category-tab {
+            flex: 1; /* cada pestaña ocupa mismo ancho */
+            padding: 12px; /* área clickeable */
+            text-align: center; /* texto centrado */
+            color: white; /* texto blanco */
+            cursor: pointer; /* cursor de mano */
+            transition: background-color 0.3s; /* animación de hover */
+        }
+
+        .category-tab.active {
+            background-color: var(--category-color); /* color según categoría activa */
+        }
+
+        .category-tab.all {
+            --category-color: #9b59b6;
+        }
+        .category-tab.civil {
+            --category-color: var(--civil-color);
+        }
+        .category-tab.network {
+            --category-color: var(--network-color);
+        }
+        .category-tab.infrastructure {
+            --category-color: var(--infrastructure-color);
+        }
+
+        .projects-container {
+            flex: 1; /* ocupa el espacio disponible */
+            padding: 15px; /* espaciado interno */
+            overflow-y: auto !important; /* fuerza scroll vertical */
+            overflow-x: hidden; /* evita scroll horizontal */
+            height: calc(100vh - 140px); /* altura restante tras header y tabs */
+            scrollbar-width: thin; /* para Firefox */
+            scrollbar-color: #9b59b6 #f8f9fa; /* colores del scroll en Firefox */
+            position: relative; /* posicionamiento correcto */
+        }
+
+        /* Custom scrollbar for Webkit browsers */
+        .projects-container::-webkit-scrollbar {
+            width: 8px; /* grosor del scrollbar */
+        }
+
+        .projects-container::-webkit-scrollbar-track {
+            background: #f8f9fa; /* color de pista */
+            border-radius: 4px; /* bordes redondeados */
+        }
+
+        .projects-container::-webkit-scrollbar-thumb {
+            background: #9b59b6; /* color del pulgar */
+            border-radius: 4px; /* bordes redondeados */
+        }
+
+        .projects-container::-webkit-scrollbar-thumb:hover {
+            background: #8e44ad; /* color al pasar el mouse */
+        }
+
+        .project-card {
+            margin-bottom: 15px; /* separación entre tarjetas */
+            padding: 15px; /* espaciado interno */
+            background-color: white; /* fondo blanco */
+            border-radius: 5px; /* esquinas redondeadas */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* sombra ligera */
+            cursor: pointer; /* indica interactividad */
+            transition: transform 0.2s, box-shadow 0.2s; /* animaciones de hover */
+            display: flex; /* alinea imagen y texto */
+            gap: 15px; /* separación entre elementos internos */
+        }
+
+        .project-card:hover {
+            transform: translateY(-2px); /* sutil elevación */
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1); /* sombra aumentada */
+        }
+
+        .project-civil {
+            border-left: 4px solid var(--civil-color); /* código de color por categoría */
+        }
+
+        .project-network {
+            border-left: 4px solid var(--network-color); /* borde verde */
+        }
+
+        .project-infrastructure {
+            border-left: 4px solid var(--infrastructure-color); /* borde rojo */
+        }
+
+        .project-title {
+            margin: 0 0 5px 0; /* separación inferior */
+            font-weight: 600; /* mayor peso tipográfico */
+        }
+
+        .project-location {
+            margin: 0; /* sin márgenes */
+            color: #6c757d; /* gris medio */
+            font-size: 0.9rem; /* tamaño reducido */
+        }
+
+        .project-description {
+            margin: 10px 0 0 0; /* margen superior */
+            font-size: 0.9rem; /* tamaño moderado */
+            color: #495057; /* gris oscuro */
+        }
+
+        .map-container {
+            flex: 1; /* ocupa espacio restante */
+            position: relative; /* posiciona el mapa interno */
+            height: 100vh; /* altura fija para emparejar la sidebar */
+        }
+
+        #map {
+            position: absolute; /* ocupa todo el contenedor */
+            top: 0; left: 0; /* anclado al origen */
+            width: 100%; /* ancho completo */
+            height: 100%; /* alto completo */
+        }
+
+        .custom-popup {
+            width: 250px; /* ancho estándar del popup */
+        }
+
+        .popup-title {
+            margin: 0 0 5px 0; /* espacio inferior */
+            font-size: 1.1rem; /* tamaño de título */
+            color: #2c3e50; /* azul oscuro */
+        }
+
+        .popup-category {
+            display: inline-block; /* etiqueta en línea con caja */
+            padding: 2px 8px; /* relleno interno */
+            border-radius: 10px; /* esquina redondeada tipo pill */
+            font-size: 0.8rem; /* tamaño pequeño */
+            color: white; /* texto blanco */
+            margin-bottom: 8px; /* separación respecto al contenido */
+        }
+
+        .popup-civil {
+            background-color: var(--civil-color); /* fondo azul */
+        }
+
+        .popup-network {
+            background-color: var(--network-color); /* fondo verde */
+        }
+
+        .popup-infrastructure {
+            background-color: var(--infrastructure-color); /* fondo rojo */
+        }
+
+        .popup-description {
+            margin: 0; /* sin márgenes */
+            font-size: 0.9rem; /* tamaño moderado */
+            color: #495057; /* gris oscuro */
+        }
+
+        .number-icon {
+            background: var(--category-color); /* color según categoría */
+            width: 24px; /* tamaño del círculo */
+            height: 24px; /* tamaño del círculo */
+            color: white; /* número en blanco */
+            display: flex; /* centra el contenido */
+            justify-content: center; /* centrado horizontal */
+            align-items: center; /* centrado vertical */
+            border-radius: 50%; /* forma circular */
+            font-size: 12px; /* tamaño del número */
+            font-weight: bold; /* negrita */
+            border: 2px solid white; /* borde blanco externo */
+            box-shadow: 0 0 0 2px var(--category-shadow); /* halo de color */
+        }
+
+        .number-icon.civil {
+            --category-color: var(--civil-color);
+            --category-shadow: rgba(52, 152, 219, 0.5);
+        }
+
+        .number-icon.network {
+            --category-color: var(--network-color);
+            --category-shadow: rgba(46, 204, 113, 0.5);
+        }
+
+        .number-icon.infrastructure {
+            --category-color: var(--infrastructure-color);
+            --category-shadow: rgba(231, 76, 60, 0.5);
+        }
+
+        /* Responsive adjustments */
+        @media (min-width: 993px) { /* escritorios grandes */
+            #galeria-section {
+                flex-direction: row; /* disposición lado a lado */
+            }
+            .sidebar {
+                width: 400px; /* ancho fijo de sidebar */
+                flex-shrink: 0; /* evita encogimiento */
+            }
+        }
+
+        @media (max-width: 992px) { /* tablets/portátiles */
+            #galeria-section {
+                flex-direction: column; /* apila verticalmente */
+                align-items: stretch; /* hijos con misma altura */
+            }
+            .sidebar {
+                width: 100%; /* ancho completo */
+                height: 50vh; /* altura fija de la sidebar */
+                max-width: 100%; /* no superar el ancho */
+                border-right: none; /* quita borde lateral */
+                border-bottom: 1px solid #dee2e6; /* separador inferior */
+            }
+            .projects-container {
+                height: calc(50vh - 140px); /* altura restante tras header y tabs */
+            }
+            .map-container {
+                height: 50vh; /* altura del mapa */
+            }
+            
+            .project-card {
+                flex-direction: column; /* apila imagen y texto */
+                gap: 10px; /* menor separación */
+            }
+            
+            .project-card > div:first-child {
+                flex: 1 1 auto; /* imagen ocupa ancho completo */
+                width: 100%; /* ancho completo */
+                margin-bottom: 8px; /* separación inferior */
+            }
+        }
+
+        @media (max-width: 576px) { /* móviles */
+            .sidebar-header {
+                padding: 15px; /* menor padding */
+            }
+            .sidebar-title {
+                font-size: 1.3rem; /* título más pequeño */
+            }
+            .category-tab {
+                padding: 8px; /* menor altura de pestañas */
+                font-size: 0.9rem; /* texto más pequeño */
+            }
+            .projects-container {
+                padding: 10px; /* padding reducido */
+            }
+            .project-card {
+                padding: 10px; /* padding reducido en tarjeta */
+            }
+        }
+
+
+
+
+

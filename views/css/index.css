@@ -1,0 +1,47 @@
+/* Bloque de texto alineado a la izquierda */
+.caption-left {
+  position: absolute; /* posiciona el bloque sobre la imagen */
+  bottom: 20px; /* separación desde la parte inferior */
+  left: 20px; /* separación desde la izquierda */
+  text-align: left; /* alinea el texto a la izquierda */
+  max-width: 40%; /* limita el ancho para buena lectura */
+  background-color: rgba(0,0,0,0.5); /* fondo semitransparente para contraste */
+  padding: 15px; /* espaciado interno */
+  border-radius: 5px; /* esquinas redondeadas */
+}
+
+/* Texto más grande */
+.caption-left h5 {
+  font-size: 2rem; /* tamaño grande para el título */
+  font-weight: bold; /* resalta el título */
+  color: white; /* texto blanco */
+  text-shadow: 2px 2px 4px black; /* mejora legibilidad sobre la imagen */
+}
+
+.caption-left p {
+  font-size: 1.5rem; /* texto descriptivo grande */
+  color: white; /* texto blanco */
+  text-shadow: 2px 2px 4px black; /* mejora legibilidad */
+  margin: 0; /* elimina margen por defecto */
+}
+
+/* Cursor parpadeante para auto-typing */
+.typing-text::after {
+  content: '|'; /* carácter del cursor */
+  animation: blink 0.7s infinite; /* animación de parpadeo */
+}
+
+@keyframes blink {
+  0%,50%,100% { opacity: 1; } /* visible */
+  25%,75% { opacity: 0; } /* oculto */
+}
+
+/* Crossfade del carrusel */
+.carousel-fade .carousel-item {
+  opacity: 0; /* elementos inactivos ocultos */
+  transition: opacity 2.5s ease-in-out; /* transición suave entre slides */
+}
+
+.carousel-fade .carousel-item.active {
+  opacity: 1; /* slide activo visible */
+}

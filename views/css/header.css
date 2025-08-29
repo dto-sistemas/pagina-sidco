@@ -1,0 +1,54 @@
+/* Header base: fondo negro translúcido 80% */
+.u-header {
+  background-color: rgba(0, 0, 0, 0.8); /* color de fondo translúcido */
+  box-shadow: 5px 5px 20px rgba(0,0,0,0.4); /* sombra alrededor del header */
+  position: relative; /* inicial: ocupa su espacio */
+  width: 100%; /* ocupa todo el ancho */
+  z-index: 999; /* por encima de otros elementos */
+  backdrop-filter: blur(5px); /* efecto vidrio opcional */
+  transition: top 0.3s, position 0.3s; /* anima el fijado al hacer scroll */
+}
+
+/* Header fijo al scrollear */
+.u-header.scrolled {
+  position: fixed; /* se fija respecto a la ventana */
+  top: 0; /* pegado a la parte superior */
+  left: 0; /* alineado al borde izquierdo */
+}
+
+/* Para desplazar el icono */
+.u-logo{
+  position: relative; /* permite desplazar sin sacar del flujo */
+  left: 50px; /* mueve el logo a la derecha */
+}
+/* Contenido interno */
+.u-nav {
+  list-style: none; /* sin viñetas */
+  display: flex; /* ítems en fila */
+  gap: 15px; /* espacio entre enlaces */
+}
+.u-nav a {
+  color: white; /* texto en blanco */
+  text-decoration: none; /* sin subrayado */
+  padding: 10px 18px; /* área clickeable más grande */
+}
+
+/* Menú responsive */
+.menu-collapse {
+  display: none; /* oculto en pantallas grandes */
+}
+@media (max-width: 768px) { /* breakpoint tablet/móvil */
+  .u-nav {
+    display: none; /* oculta navegación horizontal */
+  }
+  .menu-collapse {
+    display: block; /* muestra botón/menú hamburguesa */
+  }
+}
+
+/* Hero */
+.hero img {
+  display: block; /* elimina espacios de elementos inline */
+  width: 100%; /* ocupa todo el ancho disponible */
+  height: auto; /* mantiene proporciones */
+}
