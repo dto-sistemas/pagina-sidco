@@ -23,12 +23,12 @@ $homeHref = $base . 'index.php';
           </svg>
         </a>
       </div>
-      <ul class="u-nav">
+      <ul class="u-nav" >
         <li><a href=" <?php echo $base; ?>portfolio.php">Galería</a></li>
         <li><a href=" <?php echo $base; ?>Novedades.html">Novedades</a></li>
         <li><a href=" <?php echo $base; ?>Recursos-Humanos.php">Recursos Humanos</a></li>
         <li><a href=" <?php echo $base; ?>contacto.php">Contacto</a></li>
-        <li><a href=" <?php echo $base; ?>Suscribirse.html">Suscribirse</a></li>
+        <li><a href="#suscribirse" class="open-subscribe" role="button" aria-controls="subscribeOverlay">Suscribirse</a></li>
       </ul>
 
       <!-- Toggle tema (Uiverse) -->
@@ -47,3 +47,4 @@ $homeHref = $base . 'index.php';
 
   </div>
 </header>
+<?php include_once __DIR__ . '/subscribirse.php'; ?>

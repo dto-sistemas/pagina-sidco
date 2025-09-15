@@ -8,7 +8,6 @@
                 category: "network",
                 description: "Complete renovation of the historic Plaza de Mayo including pavement, lighting and green areas.",
                 coords: [-34.46197264416397, -58.95159188995362]
-                
             },
             {
                 id: 2,
@@ -44,8 +43,8 @@
             },
             {
                 id: 6,
-                title: "Las moradas",
-                location: "Las moradas, Buenos Aires",
+                title: "Las Moradas",
+                location: "Las Moradas, Buenos Aires",
                 category: "network",
                 description: "Installation of city-wide WiFi network in downtown Buenos Aires.",
                 coords: [-34.57826145918516, -58.68429285344798]
@@ -140,12 +139,12 @@
             }
         ];
 
-        // Declare map and markers variables in a scope accessible by all functions
+        // Declarar variables de mapa y marcadores en un ámbito accesible por todas las funciones
         let map;
         let markers;
         const projectMarkers = {};
 
-        // Helper function to create custom Leaflet icons
+        // Función auxiliar: crea íconos personalizados de Leaflet con número y categoría
         function createCustomIcon(category, id) {
             return L.divIcon({
                 className: '',
@@ -155,28 +154,70 @@
             });
         }
 
-        // Helper to build project URL (convention-based)
+        // Función auxiliar: construye la URL del proyecto (basado en convención)
         function getProjectUrl(project) {
             if (project.url) return project.url;
             if (project.title === 'El Milord') return 'views/Obras/obra-1.php';
             return `views/Obras/obra-${project.id}.php`;
         }
 
-        // Helper function to create popup content
+        // Función auxiliar: obtiene la imagen principal (hero) para cada proyecto (escalable por reglas)
+        function getProjectHero(project) {
+            const DEFAULT_IMG = 'https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/632c7061-4e31-490d-96ab-a37bedd6140f.png';
+
+            // Normalizadores/utilidades
+            const toSlug = (str) => (str || '')
+              .toLowerCase()
+              .normalize('NFD').replace(/\p{Diacritic}/gu, '')
+              .replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+            const title = (project.title || '').toLowerCase();
+            const slug = toSlug(project.title || '');
+
+            // Reglas declarativas fáciles de extender
+            const RULES = [
+              // 1) Por ID
+              { test: (p) => p.id === 1, image: 'views/Obras/images/moradas/IMG_7843.jpg' },
+              { test: (p) => p.id === 2, image: 'views/Obras/images/moradas/IMG_7904.jpg' },
+              { test: (p) => p.id === 6, image: 'views/Obras/images/moradas/DJI_0418.jpg' },
+
+              // 2) Por palabra clave en título
+              { test: () => title.includes('el milord'), image: 'views/Obras/images/moradas/IMG_7843.jpg' },
+              { test: () => title.includes('el milord'), image: 'views/Obras/images/moradas/IMG_7904.jpg' },
+              { test: () => title.includes('moradas'), image: 'views/Obras/images/moradas/DJI_0418.jpg' },
+
+              // 3) Convención: carpeta por slug (si existiera), probar hero.jpg/png
+              { test: () => !!slug, image: () => `views/Obras/images/${slug}/hero.jpg` },
+              { test: () => !!slug, image: () => `views/Obras/images/${slug}/hero.png` },
+            ];
+
+            for (const rule of RULES) {
+              try {
+                if (rule.test(project)) {
+                  const img = typeof rule.image === 'function' ? rule.image(project) : rule.image;
+                  if (img) return img;
+                }
+              } catch (_) {}
+            }
+            return DEFAULT_IMG;
+        }
+
+        // Función auxiliar: construye el contenido HTML del popup del proyecto
         function createPopupContent(project) {
             const categoryClass = `popup-${project.category}`;
             const url = getProjectUrl(project);
             return `
-                <div>
-                    <h3 class="popup-title"><a href="${url}" target="_blank" rel="noopener noreferrer" style="text-decoration:none; color:inherit;">${project.title}</a></h3>
-                    <span class="popup-category ${categoryClass}">${getCategoryName(project.category)}</span>
-                    <p class="popup-location"><small>${project.location}</small></p>
-                    <p class="popup-description">${project.description}</p>
+                <div class=\"popup-inner\">
+                    <span class=\"popup-category ${categoryClass}\">${getCategoryName(project.category)}</span>
+                    <img class=\"popup-thumb\" src=\"${getProjectHero(project)}\" alt=\"${project.title} preview\" />
+                    <h3 class=\"popup-title\">${project.title}</h3>
+                    <div class=\"popup-actions\">
+                        <a href=\"${url}\" class=\"cta-button ${categoryClass} open-details\" data-url=\"${url}\" aria-label=\"Ver detalles de ${project.title}\">Ver Detalles</a>
+                    </div>
                 </div>
             `;
         }
 
-        // Helper function to get category display name
+        // Función auxiliar: devuelve el nombre visible de la categoría
         function getCategoryName(category) {
             switch(category) {
                 case 'civil': return 'Civil';
@@ -186,39 +227,44 @@
             }
         }
 
-        // Function to render projects in the sidebar
+        // Renderiza los proyectos en la barra lateral con filtrado por categoría
         function renderProjects(category = 'all') {
+            // Contenedor donde se insertarán las tarjetas de proyectos
             const container = document.getElementById('projectsContainer');
             container.innerHTML = '';
             
+            // Determinar proyectos a mostrar según la categoría
             const filteredProjects = category === 'all' 
                 ? projects 
                 : projects.filter(p => p.category === category);
             
             filteredProjects.forEach(project => {
+                // Crear tarjeta de proyecto con clases y atributos de datos
                 const projectElement = document.createElement('div');
                 projectElement.className = `project-card project-${project.category}`;
                 projectElement.dataset.projectId = project.id;
                 
                 projectElement.innerHTML = `
-                    <div style="flex: 0 0 120px; min-width: 120px;">
-                        <img src="https://storage.googleapis.com/workspace-0f70711f-8b4e-4d94-86f1-2a93ccde5887/image/632c7061-4e31-490d-96ab-a37bedd6140f.png" 
-                             alt="${project.title} Preview" 
-                             style="width:100%; height: 80px; max-height: 100%; object-fit: cover; border-radius:4px;">
+                    <!-- Miniatura del proyecto -->
+                    <div class="project-thumb-wrapper">
+                        <img class="project-thumb" src="${getProjectHero(project)}" 
+                             alt="${project.title} Preview">
                     </div>
-                    <div style="flex: 1;">
+                    <div class="project-info">
+                        <!-- Información básica del proyecto -->
                         <h3 class="project-title">${project.title}</h3>
-                    <p class="project-location">${project.location}</p>
-                    <p class="project-description">${project.description}</p>
+                        <p class="project-location">${project.location}</p>
+                        <p class="project-description">${project.description}</p>
                     </div>
                 `;
                 
                 projectElement.addEventListener('click', () => {
+                    // Centrar el mapa en el marcador del proyecto y abrir su popup
                     const marker = projectMarkers[project.id];
                     map.setView(marker.getLatLng(), 15);
                     marker.openPopup();
                     
-                    // Highlight the clicked project
+                    // Resaltar visualmente el proyecto clickeado
                     document.querySelectorAll('.project-card').forEach(el => {
                         el.style.borderLeftWidth = '4px';
                     });
@@ -229,21 +275,21 @@
             });
         }
 
-        // Initialize map and load projects when DOM is fully loaded
+        // Inicializar el mapa y cargar proyectos cuando el DOM esté listo
         document.addEventListener('DOMContentLoaded', function() {
-            // Initialize the map centered on Buenos Aires
+            // Crear el mapa centrado en Buenos Aires
             map = L.map('map').setView([-34.6037, -58.3816], 12);
 
-            // Add OpenStreetMap tiles
+            // Agregar capas de OpenStreetMap
             L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
                 attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
                 maxZoom: 19,
             }).addTo(map);
 
-            // Create feature group for markers
+            // Crear un grupo de capas para contener los marcadores
             markers = L.featureGroup().addTo(map);
 
-            // Add markers for projects
+            // Agregar un marcador por cada proyecto
             projects.forEach(project => {
                 const icon = createCustomIcon(project.category, project.id);
                 
@@ -254,25 +300,39 @@
                 
                 marker.bindPopup(createPopupContent(project), { className: 'custom-popup' });
                 
+                // Guardar referencia al marcador por id de proyecto
                 projectMarkers[project.id] = marker;
             });
 
-            // Initialize with all projects
+            // Interceptar clics en el botón del popup para abrir detalles en nueva pestaña
+            map.on('popupopen', function(e) {
+                const popupEl = e.popup.getElement();
+                if (!popupEl) return;
+                const btn = popupEl.querySelector('.open-details');
+                if (!btn) return;
+                btn.addEventListener('click', function(ev) {
+                    ev.preventDefault();
+                    const url = btn.getAttribute('data-url') || btn.getAttribute('href');
+                    window.open(url, '_blank', 'noopener,noreferrer');
+                }, { once: true });
+            });
+
+            // Inicializar la vista con todos los proyectos
             renderProjects();
 
-            // Handle category tab clicks
+            // Manejar clics en pestañas de categoría
             document.querySelectorAll('.category-tab').forEach(tab => {
                 tab.addEventListener('click', function() {
                     const category = this.dataset.category;
                     
-                    // Update active tab
+                    // Actualizar pestaña activa visualmente
                     document.querySelectorAll('.category-tab').forEach(t => t.classList.remove('active'));
                     this.classList.add('active');
                     
-                    // Render projects for the selected category
+                    // Renderizar proyectos para la categoría seleccionada
                     renderProjects(category);
                     
-                    // Fly to bounds of markers in this category
+                    // Ajustar el mapa a los límites de los marcadores de la categoría
                     const categoryProjects = category === 'all' 
                         ? projects 
                         : projects.filter(p => p.category === category);

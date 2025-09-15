@@ -44,24 +44,33 @@
         }
         
         #galeria-section {
-            background-color: #9b59b6; /* color de fondo general */
-            margin: 0; /* elimina márgenes */
-            padding: 0; /* elimina relleno */
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* tipografía base */
-            display: flex; /* layout en fila/columna */
-            min-height: 100vh; /* permite que la página haga scroll */
-            align-items: stretch; /* hijos con misma altura */
+            background-color: #0f0f10; /* fondo neutro oscuro */
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            min-height: 100vh;
+            align-items: stretch;
+            gap: 0; /* sin huecos entre columnas */
+        }
+
+        /* Columna izquierda contenedora de la sidebar */
+        .galeria-wrapper {
+            flex: 0 0 40%;
+            max-width: 40%;
+            display: flex;
         }
 
         .sidebar {
-            width: 400px; /* ancho fijo de la barra lateral */
-            background-color: #f8f9fa; /* fondo claro */
-            border-right: 1px solid #dee2e6; /* separador derecho */
-            display: flex; /* contenedor flexible vertical */
-            flex-direction: column; /* apila elementos */
-            height: 100vh; /* iguala la altura al mapa */
-            position: relative; /* control de posicionamiento */
-            overflow: hidden; /* evita scroll interno */
+            background-color: #f8f9fa;
+            border-right: 1px solid #dee2e6;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            width: 100%; /* ocupa toda su columna */
+            max-width: 100%;
         }
 
         .sidebar-header {
@@ -74,7 +83,7 @@
 
         .sidebar-title {
             margin: 0; /* sin margen */
-            font-size: 1.5rem; /* tamaño de título */
+            font-size: 1.6rem; /* tamaño de título */
         }
 
         .category-tabs {
@@ -90,6 +99,8 @@
             color: white; /* texto blanco */
             cursor: pointer; /* cursor de mano */
             transition: background-color 0.3s; /* animación de hover */
+            font-size: 1.15rem; /* texto más grande */
+            font-weight: 600; /* mayor peso para legibilidad */
         }
 
         .category-tab.active {
@@ -111,7 +122,7 @@
 
         .projects-container {
             flex: 1; /* ocupa el espacio disponible */
-            padding: 15px; /* espaciado interno */
+            padding: 16px; /* espaciado más compacto */
             overflow-y: auto !important; /* fuerza scroll vertical */
             overflow-x: hidden; /* evita scroll horizontal */
             height: calc(100vh - 140px); /* altura restante tras header y tabs */
@@ -140,15 +151,34 @@
         }
 
         .project-card {
-            margin-bottom: 15px; /* separación entre tarjetas */
+            margin-bottom: 14px; /* separación más ajustada */
             padding: 15px; /* espaciado interno */
             background-color: white; /* fondo blanco */
-            border-radius: 5px; /* esquinas redondeadas */
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* sombra ligera */
+            border-radius: 3px; /* esquinas redondeadas */
+            box-shadow: 0 2px 5px rgba(0,0,0,0.5); /* sombra ligera */
             cursor: pointer; /* indica interactividad */
             transition: transform 0.2s, box-shadow 0.2s; /* animaciones de hover */
             display: flex; /* alinea imagen y texto */
             gap: 15px; /* separación entre elementos internos */
+            min-height: 180px; /* acomoda miniatura más grande */
+        }
+
+        /* MINIATURAS más grande y consistente */
+        .project-thumb-wrapper {
+            flex: 0 0 200px; /* ancho visible de la miniatura en desktop */
+            min-width: 340px;
+        }
+
+        .project-thumb {
+            width: 100%;
+            height: 190px; /* alto proporcional, sin deformar tarjeta */
+            object-fit: cover;
+            border-radius: 6px;
+        }
+
+        .project-info {
+            flex: 1;
+            min-width: 0; /* permite clamping correcto */
         }
 
         .project-card:hover {
@@ -181,12 +211,102 @@
 
         .project-description {
             margin: 10px 0 0 0; /* margen superior */
-            font-size: 0.9rem; /* tamaño moderado */
+            font-size: 1.25rem; /* tamaño moderado */
             color: #495057; /* gris oscuro */
+            display: -webkit-box;
+            -webkit-line-clamp: 3; /* mostrar 3 líneas máx */
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
+        /* ===== Popup card (Uiverse) ===== */
+        .card {
+          --white: hsl(0, 0%, 83%);
+          --black: hsl(240, 15%, 9%);
+          --stone-300: hsl(24, 6%, 83%);
+          --pink-500: hsl(299, 100%, 83%);
+          cursor: pointer;
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .sub-card {
+          display: flex;
+          align-items: center;
+          padding: 0.75rem;
+          min-width: 11.5rem;
+          height: 2.25rem;
+          background-color: var(--stone-300);
+        }
+        .sub-card.category {
+          justify-content: space-between;
+          border-radius: 0.5rem 0.5rem 0rem 0rem;
+          transition: all 0.5s cubic-bezier(1, 0, 0, 1);
+        }
+        .sub-card.named {
+          justify-content: center;
+          border-radius: 0rem 0rem 0.5rem 0.5rem;
+          transition: all 0.5s cubic-bezier(1, 0, 0, 1);
+        }
+        .card:hover .sub-card.category { transform: translateY(100%); }
+        .card:hover .sub-card.named { transform: translateY(-100%); }
+        .sub-card .text_span { font-size: 0.75rem; font-weight: 600; color: var(--black); text-transform: capitalize; }
+        .sub-card .icon_svg { width: 1rem; fill: var(--black); }
+        .card_container {
+          overflow: hidden;
+          position: relative;
+          z-index: 5;
+          width: 100%;
+          height: 180px; /* alto fijo para la imagen */
+          background-color: transparent;
+          border-radius: 0.5rem;
+        }
+        /* Overlay y botón centrado en hover */
+        .card_container::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          background: rgba(0,0,0,0); /* sin overlay por defecto */
+          transition: background .35s ease;
+          z-index: 2;
+        }
+        .card_container::after {
+          content: "Ver más";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%) scale(0.8);
+          padding: 10px 16px;
+          border-radius: 999px;
+          background: var(--primary-color, #c60074);
+          color: #fff;
+          font-weight: 700;
+          font-size: .95rem;
+          opacity: 0;
+          transition: opacity .3s ease, transform .3s ease;
+          z-index: 3;
+          box-shadow: 0 6px 18px rgba(0,0,0,.25);
+          pointer-events: none;
+        }
+        .card:hover .card_container::before { background: rgba(0,0,0,0.45); }
+        .card:hover .card_container::after { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+
+        /* Imagen de contenido: ocupa todo el contenedor */
+        .card_container .image {
+          position: static;
+          display: block;
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 8px;
+          transition: filter .35s ease, opacity .35s ease;
+        }
+        .card:hover .card_container .image { filter: brightness(0.6); }
+
         .map-container {
-            flex: 1; /* ocupa espacio restante */
+            flex: 0 0 60%;
+            max-width: 60%;
             position: relative; /* posiciona el mapa interno */
             height: 100vh; /* altura fija para emparejar la sidebar */
         }
@@ -270,10 +390,8 @@
             #galeria-section {
                 flex-direction: row; /* disposición lado a lado */
             }
-            .sidebar {
-                width: 400px; /* ancho fijo de sidebar */
-                flex-shrink: 0; /* evita encogimiento */
-            }
+            .galeria-wrapper { flex: 0 0 40%; max-width: 40%; }
+            .map-container { flex: 0 0 60%; max-width: 60%; }
         }
 
         @media (max-width: 992px) { /* tablets/portátiles */
@@ -283,16 +401,16 @@
             }
             .sidebar {
                 width: 100%; /* ancho completo */
-                height: 50vh; /* altura fija de la sidebar */
+                height: 40vh; /* 40% de la pantalla */
                 max-width: 100%; /* no superar el ancho */
                 border-right: none; /* quita borde lateral */
                 border-bottom: 1px solid #dee2e6; /* separador inferior */
             }
             .projects-container {
-                height: calc(50vh - 140px); /* altura restante tras header y tabs */
+                height: calc(40vh - 140px); /* altura restante tras header y tabs */
             }
             .map-container {
-                height: 50vh; /* altura del mapa */
+                height: 60vh; /* 60% de la pantalla */
             }
             
             .project-card {
@@ -330,3 +448,27 @@
 
 
 
+        /* ===== Scrollbar dorado solo en modo claro ===== */
+        @media (prefers-color-scheme: light) {
+            .projects-container {
+                /* Para Firefox: pulgar dorado, pista clara */
+                scrollbar-color: #d4af37 #f8f9fa;
+            }
+            .projects-container::-webkit-scrollbar-thumb {
+                background: #d4af37; /* dorado */
+            }
+            .projects-container::-webkit-scrollbar-thumb:hover {
+                background: #b8860b; /* dorado más oscuro al hover */
+            }
+        }
+
+        /* Forzado cuando el tema se controla por atributo de datos */
+        [data-theme="light"] .projects-container {
+            scrollbar-color: #d4af37 #f8f9fa; /* Firefox */
+        }
+        [data-theme="light"] .projects-container::-webkit-scrollbar-thumb {
+            background: #d4af37; /* WebKit */
+        }
+        [data-theme="light"] .projects-container::-webkit-scrollbar-thumb:hover {
+            background: #b8860b; /* Hover WebKit */
+        }

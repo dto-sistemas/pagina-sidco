@@ -20,19 +20,19 @@
                         <div class="social-media">
                             <h4>Síguenos</h4>
                             <div class="social-links">
-                                <a href="#" class="social-link" aria-label="Facebook">
+                                <a href="https://www.facebook.com/people/Sidco/100050922140663/#" class="social-link" aria-label="Facebook">
                                     <i class="fab fa-facebook-f"></i>
                                 </a>
                                 <a href="https://www.instagram.com/sidcoempresaconstructora/" class="social-link" aria-label="Instagram">
                                     <i class="fab fa-instagram"></i>
                                 </a>
-                                <a href="#" class="social-link" aria-label="LinkedIn">
+                                <a href="https://www.linkedin.com/in/constructora-sidco-srl-3ab23a348/" class="social-link" aria-label="LinkedIn">
                                     <i class="fab fa-linkedin-in"></i>
                                 </a>
-                                <a href="#" class="social-link" aria-label="YouTube">
+                                <a href="https://www.youtube.com/@sidcoconstrucciones5749" class="social-link" aria-label="YouTube">
                                     <i class="fab fa-youtube"></i>
                                 </a>
-                                <a href="#" class="social-link" aria-label="WhatsApp">
+                                <a href="https://wa.me/5491150502634" class="social-link" aria-label="WhatsApp">
                                     <i class="fab fa-whatsapp"></i>
                                 </a>
                             </div>
@@ -50,7 +50,7 @@
                         <li><a href=" <?php echo $base; ?>Novedades.html">Novedades</a></li>
                         <li><a href=" <?php echo $base; ?>Recursos-Humanos.html">Recursos Humanos</a></li>
                         <li><a href=" <?php echo $base; ?>contacto.php">Contacto</a></li>
-                        <li><a href=" <?php echo $base; ?>Suscribirse.html">Suscripción</a></li>
+                        <li><a href="#suscribirse" class="open-subscribe" role="button" aria-controls="subscribeOverlay">Suscripción</a></li>
                         </ul>
                     </div>
 
@@ -63,15 +63,15 @@
                         <div class="contact-info">
                             <div class="contact-item">
                                 <i class="fas fa-envelope"></i>
-                                <span>info@sidco.com</span>
+                                <span>informate@constructorasidco.com</span>
                             </div>
                             <div class="contact-item">
                                 <i class="fas fa-phone"></i>
-                                <span>+54 11 1234-5678</span>
+                                <span>+54 9 11 5050-2634</span>
                             </div>
                             <div class="contact-item">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <span>Av. Corrientes 1234, CABA, Argentina</span>
+                                <span>Polvorines, Buenos Aires, Argentina</span>
                             </div>
                         </div>
                     </div>

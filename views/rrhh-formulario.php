@@ -73,13 +73,15 @@
           <div class="g-recaptcha" data-sitekey="6LcvYrcrAAAAAAF6c_ocADo7pDYi7C_QAaRpznM5"></div>
           <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 
-          <!-- Botón Enviar -->
-          <div class="u-align-left u-form-group u-form-submit">
-            <button type="submit" class="u-btn u-btn-submit u-button-style">Enviar</button>
+          <!-- Botón Enviar y mensaje de campos obligatorios -->
+          <div class="submit-section">
+            <div class="u-align-left u-form-group u-form-submit">
+              <button type="submit" id="btn-enviar" class="u-btn u-btn-submit u-button-style">Enviar</button>
+            </div>
+            <p class="u-text u-text-default u-text-3">Todos los campos marcados con un (*) son obligatorios.</p>
           </div>
         </form>
       </div>
-      <p class="u-text u-text-default u-text-3">Todos los campos marcados con un (*) son obligatorios.</p>
     </div>
   </div>
 
@@ -96,3 +98,6 @@
 
 <!-- CSS vinculado -->
 <link rel="stylesheet" href="/Pagina/views/css/rrhh.css">
+
+<!-- JavaScript vinculado -->
+<script src="/Pagina/views/js/rrhh.js"></script>
