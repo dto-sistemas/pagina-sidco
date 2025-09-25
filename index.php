@@ -240,7 +240,7 @@
                 <div class="timeline-slide active" data-index="0">
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="timeline-image-block" data-aos="fade-right">
-                            <div class="timeline-image" style="background-image: url('views/Obras/images/moradas/DJI_0418.jpg');"></div>
+                            <div class="timeline-image" style="background-image: url('views/Obras/images/las moradas/DJI_0418.jpg');"></div>
                         </div>
                         <div class="timeline-info-block" data-aos="fade-left">
                             <h3 class="text-2xl font-bold mb-2" style="color: var(--text-color);">Centro Comercial Integral</h3>
@@ -261,7 +261,7 @@
                 <div class="timeline-slide" data-index="1">
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="timeline-image-block">
-                            <div class="timeline-image" style="background-image: url('views/Obras/images/moradas/IMG_7843.jpg');"></div>
+                            <div class="timeline-image" style="background-image: url('views/Obras/images/las%20moradas/IMG_7843.jpg');"></div>
                         </div>
                         <div class="timeline-info-block">
                             <h3 class="text-2xl font-bold mb-2" style="color: var(--text-color);">Sistema Hidráulico Urbano</h3>
@@ -282,7 +282,7 @@
                 <div class="timeline-slide" data-index="2">
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="timeline-image-block">
-                            <div class="timeline-image" style="background-image: url('views/Obras/images/moradas/IMG_7851.jpg');"></div>
+                            <div class="timeline-image" style="background-image: url('views/Obras/images/las%20moradas/IMG_7851.jpg');"></div>
                         </div>
                         <div class="timeline-info-block">
                             <h3 class="text-2xl font-bold mb-2" style="color: var(--text-color);">Infraestructura Vial Principal</h3>
@@ -303,7 +303,7 @@
                 <div class="timeline-slide" data-index="3">
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="timeline-image-block">
-                            <div class="timeline-image" style="background-image: url('views/Obras/images/moradas/IMG_7904.jpg');"></div>
+                            <div class="timeline-image" style="background-image: url('views/Obras/images/las%20moradas/IMG_7904.jpg');"></div>
                         </div>
                         <div class="timeline-info-block">
                             <h3 class="text-2xl font-bold mb-2" style="color: var(--text-color);">Complejo Industrial Moderno</h3>
@@ -324,7 +324,7 @@
                 <div class="timeline-slide" data-index="4">
                     <div class="grid md:grid-cols-2 gap-12 items-center">
                         <div class="timeline-image-block">
-                            <div class="timeline-image" style="background-image: url('views/Obras/images/moradas/DJI_0418.jpg');"></div>
+                            <div class="timeline-image" style="background-image: url('views/Obras/images/las%20moradas/DJI_0418.jpg');"></div>
                         </div>
                         <div class="timeline-info-block">
                             <h3 class="text-2xl font-bold mb-2" style="color: var(--text-color);">Obra Residencial Premium</h3>
