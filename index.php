@@ -41,23 +41,25 @@
 
 <!-- ===== SECCIÓN 2: VIDEO DESTACADO ===== -->
 <!-- Video promocional/institucional en formato 16:9 -->
-<section class="home-video" aria-label="Video destacado">
-  <div class="container">
-    <div class="video-wrapper">
-      <iframe 
-        class="video-frame"
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&rel=0&controls=0&showinfo=0&modestbranding=1"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen>
-      </iframe>
+<!--
+  <section class="home-video" aria-label="Video destacado">
+    <div class="container">
+      <div class="video-wrapper">
+        <iframe 
+          class="video-frame"
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&rel=0&controls=0&showinfo=0&modestbranding=1"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen>
+        </iframe>
+      </div>
     </div>
-  </div>
-</section>
-
+  </section>
+-->
+  
 <!-- ===== SECCIÓN 3: SOBRE NOSOTROS ===== -->
 <!-- Layout 40/60 con imagen semicircular y texto descriptivo -->
 <section class="home-about" aria-label="Creemos en lo simple, lo claro y lo útil.">
